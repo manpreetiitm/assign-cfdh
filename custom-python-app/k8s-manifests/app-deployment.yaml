@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: custom-python-app
-        image: manpreetiitm/custom-python-app:v2
+        image: manpreetiitm/custom-python-app:v3
         ports:
         - containerPort: 3000
         env:
