@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  namespace: custom-python-app-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:13
+        env:
+          - name: POSTGRES_USER
+            value: admin 
+          - name: POSTGRES_PASSWORD
+            value: admin 
+          - name: POSTGRES_DB
+            value: newdb 
+        ports:
+          - containerPort: 5432
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-service
+  namespace: custom-python-app-namespace
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: db

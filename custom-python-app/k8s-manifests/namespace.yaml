@@ -1,0 +1,10 @@
+# namespaces.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: custom-python-app-namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring-namespace

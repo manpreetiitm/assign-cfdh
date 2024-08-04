@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-python-app
+  namespace: custom-python-app-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: custom-python-app
+  template:
+    metadata:
+      labels:
+        app: custom-python-app
+    spec:
+      containers:
+      - name: custom-python-app
+        image: manpreetiitm/custom-python-app:v1 
+        ports:
+        - containerPort: 3000
