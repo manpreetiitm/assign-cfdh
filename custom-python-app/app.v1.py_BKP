@@ -11,9 +11,9 @@ http_request_duration = Histogram('http_request_duration_seconds', 'HTTP Request
 
 # Database connection settings
 db_params = {
-    'dbname': 'newdb',
-    'user': 'admin',
-    'password': 'admin',
+    'dbname': 'your_db_name',
+    'user': 'your_db_user',
+    'password': 'your_db_password',
     'host': 'db-service',
     'port': '5432'
 }
