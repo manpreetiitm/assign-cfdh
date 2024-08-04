@@ -17,7 +17,7 @@ spec:
       - name: custom-python-app
         image: manpreetiitm/custom-python-app:v2
         ports:
-        - containerPort: 5000
+        - containerPort: 3000
         env:
         - name: DATABASE_URL
           value: "postgresql://admin:admin@postgres.db-service.custom-python-app-namespace.svc.cluster.local:5432/newdb"
@@ -29,7 +29,7 @@ metadata:
   namespace: custom-python-app-namespace 
 spec:
   ports:
-  - port: 5000
-    targetPort: 5000
+  - port: 3000
+    targetPort: 3000
   selector:
     app: my-python-app
