@@ -315,7 +315,7 @@ helm install node-exporter prometheus-community/prometheus-node-exporter \
    ```
 9. Edit the Prometheus Configuration:
 
-   ```
+```
 groups:
   - name: kubernetes-nodes
     rules:
