@@ -327,6 +327,14 @@ groups:
 
 10. Apply the Configuration Changes.
 
+11. Open your browser and go to http://localhost:9090/targets:
+    
+![image](https://github.com/user-attachments/assets/d5abaaca-7704-4f23-bb48-04a5e2292666)
+
+![image](https://github.com/user-attachments/assets/d5b4d92e-11f4-4fb1-bcf5-63f2c6212fcb)
+
+
+
 11. Setup Grafana Dashboard:
 
     Access Grafana:
@@ -350,12 +358,21 @@ kubectl port-forward service/grafana 3000:80 -n monitoring-namespace
     b. Input the dashboard ID for Kubernetes Dashboard, such as 6417 or 3119, and click Import. These IDs are for community dashboards that you can find in the Grafana dashboard repository.
     c. Choose your Prometheus data source.
 
-14. Visualize Node Metrics:
+
+    ![image](https://github.com/user-attachments/assets/3774f921-a9df-42ea-b318-f883339c9227)
+
+
+15. Visualize Node Metrics:
     The imported dashboard will provide an overview of node metrics, including CPU usage, memory usage, network I/O, disk I/O, etc.
 
 ## Step 9: Monitoring Pods ##
 
 Import pre-built Grafana dashboards to visualize pod metrics.
+
+
+Some output Grafana Dashboard:
+
+
    
 
 
