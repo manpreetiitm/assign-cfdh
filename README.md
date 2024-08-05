@@ -337,9 +337,9 @@ kubectl port-forward service/grafana 3000:80 -n monitoring-namespace
    Access it at http://localhost:3000 with the default login admin/admin.
 
 12.  Add Prometheus as a Data Source:
-    a. Go to Configuration -> Data Sources in Grafana.
-    b. Click on Add data source.
-    c. Choose Prometheus and configure it with the URL http://prometheus-server.monitoring-namespace.svc.cluster.local:80.
+    a. Go to Configuration -> Data Sources in Grafana.\\
+    b. Click on Add data source.\\
+    c. Choose Prometheus and configure it with the URL http://prometheus-server.monitoring-namespace.svc.cluster.local:80.\\
     d. Click Save & Test.
 
 13. Import Kubernetes Dashboards:
