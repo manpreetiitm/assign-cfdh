@@ -246,6 +246,118 @@ spec:
     name VARCHAR(100)
 );
 ```
+### Step 8: Set Up Prometheus and Grafana with Helm ##
+
+1. Add Helm Chart Repositories:
+   
+```
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+```
+
+2. Install Prometheus:
+
+```
+helm install prometheus prometheus-community/prometheus --namespace monitoring-namespace
+```
+
+3. Instal Grafana:
+
+```
+helm install grafana grafana/grafana --namespace monitoring-namespace
+```
+
+4. Create a new ConfigMap YAML file called prometheus-config.yaml:
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: monitoring-namespace
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+
+    scrape_configs:
+      - job_name: 'custom-python-app'
+        metrics_path: '/metrics'
+        static_configs:
+          - targets: ['custom-python-app.custom-python-app-namespace.svc.cluster.local:3000']
+```
+
+5. Apply the ConfigMap:
+
+```
+kubectl apply -f prometheus-config.yaml
+```
+
+6. Restarting Prometheus to Apply Changes
+
+```
+kubectl rollout restart deployment <prometheus-deployment-name> -n monitoring-namespace
+```
+
+7. Deploy Node Exporter Using Helm:
+
+```
+helm install node-exporter prometheus-community/prometheus-node-exporter \
+  --namespace monitoring-namespace \
+  --set prometheus.enabled=true \
+  --set serviceMonitor.enabled=true
+```
+
+8. Update Prometheus to Scrape Node Exporter
+
+   ```
+   kubectl get configmaps -n monitoring-namespace
+   ```
+9. Edit the Prometheus Configuration:
+
+   ```
+groups:
+  - name: kubernetes-nodes
+    rules:
+      - record: node_memory_utilization: gauge
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes
+      - record: node_cpu_utilization: gauge
+        expr: rate(node_cpu_seconds_total[5m])
+```
+
+10. Apply the Configuration Changes.
+
+11. Setup Grafana Dashboard:
+
+    Access Grafana:
+
+```
+kubectl port-forward service/grafana 3000:80 -n monitoring-namespace
+```
+   Access it at http://localhost:3000 with the default login admin/admin.
+
+12.  Add Prometheus as a Data Source:
+    a. Go to Configuration -> Data Sources in Grafana.
+    b. Click on Add data source.
+    c. Choose Prometheus and configure it with the URL http://prometheus-server.monitoring-namespace.svc.cluster.local:80.
+    d. Click Save & Test.
+
+13. Import Kubernetes Dashboards:
+
+    Grafana has many pre-built dashboards for Kubernetes monitoring:
+
+    a. Go to Create -> Import.
+    b. Input the dashboard ID for Kubernetes Dashboard, such as 6417 or 3119, and click Import. These IDs are for community dashboards that you can find in the Grafana dashboard repository.
+    c. Choose your Prometheus data source.
+
+14. Visualize Node Metrics:
+    The imported dashboard will provide an overview of node metrics, including CPU usage, memory usage, network I/O, disk I/O, etc.
+
+## Step 9: Monitoring Pods ##
+
+Import pre-built Grafana dashboards to visualize pod metrics.
+   
+
 
 
 
