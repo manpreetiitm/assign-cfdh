@@ -372,6 +372,12 @@ Import pre-built Grafana dashboards to visualize pod metrics.
 
 Some output Grafana Dashboard:
 
+![image](https://github.com/user-attachments/assets/9a48ab0a-9214-48ac-9fc7-abd50b497882)
+
+![image](https://github.com/user-attachments/assets/6cd22a11-2bf0-433f-94ee-3bf49758664f)
+
+
+
 
    
 
